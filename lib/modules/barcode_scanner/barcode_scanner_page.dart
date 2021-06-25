@@ -5,6 +5,7 @@ import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
 import 'package:payflow/shared/widgets/bottom_sheet/bottom_sheet_widget.dart';
+import 'package:payflow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 
 class BarcodeScannerPage extends StatefulWidget {
   const BarcodeScannerPage({Key? key}) : super(key: key);
@@ -46,6 +47,16 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
               backgroundColor: Colors.transparent,
               appBar: buildAppBar(),
               body: buildBody(),
+              bottomNavigationBar: SetLabelButtons(
+                primaryLabel: "Inserir código do boleto",
+                primaryOnPressed: () {
+                  _barcodeScannerController.status =
+                      BarcodeScannerStatus.error("Error");
+                },
+                secondaryLabel: "Adicionar da galeria",
+                secondaryOnPressed:
+                    _barcodeScannerController.scanWithImagePicker,
+              ),
             ),
           ),
           buildBottomSheetWidget(),

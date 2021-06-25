@@ -68,7 +68,7 @@ class BarcodeScannerController {
 
   void scanWithCamera() {
     status = BarcodeScannerStatus.available();
-    Future.delayed(const Duration(seconds: 20)).then((value) {
+    Future.delayed(const Duration(seconds: 10)).then((value) {
       if (status.hasBarcode == false) {
         status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
       }

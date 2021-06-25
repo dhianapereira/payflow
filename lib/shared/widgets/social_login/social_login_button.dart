@@ -5,7 +5,13 @@ import 'package:payflow/shared/themes/app_text_styles.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final GestureTapCallback onTap;
-  const SocialLoginButton({Key? key, required this.onTap}) : super(key: key);
+  final bool showProgress;
+
+  const SocialLoginButton({
+    Key? key,
+    required this.onTap,
+    this.showProgress = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,39 +27,45 @@ class SocialLoginButton extends StatelessWidget {
             BorderSide(color: AppColors.stroke),
           ),
         ),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(width: 12),
-                  Image.asset(AppImages.google),
-                  const SizedBox(width: 12),
-                  Container(
-                    height: 56,
-                    width: 1,
-                    color: AppColors.stroke,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 4,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Entrar com Google",
-                    style: AppTextStyles.buttonGray,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        child: showProgress
+            ? const Center(child: CircularProgressIndicator())
+            : buildGoogleButton(),
       ),
+    );
+  }
+
+  Row buildGoogleButton() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(width: 12),
+              Image.asset(AppImages.google),
+              const SizedBox(width: 12),
+              Container(
+                height: 56,
+                width: 1,
+                color: AppColors.stroke,
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 4,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Entrar com Google",
+                style: AppTextStyles.buttonGray,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

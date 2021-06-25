@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final loginController = LoginController();
+  final _loginController = LoginController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +73,14 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: SocialLoginButton(
-              onTap: () => loginController.googleSignIn(context),
+            child: StreamBuilder<bool>(
+              stream: _loginController.output,
+              builder: (context, snapshot) {
+                return SocialLoginButton(
+                  onTap: () => _loginController.googleSignIn(context),
+                  showProgress: _loginController.isProcessing,
+                );
+              },
             ),
           ),
         ],

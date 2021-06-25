@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:payflow/modules/home/home_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
+import 'package:payflow/shared/utils/app_navigator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> pages = [
     Container(color: Colors.red),
-    Container(color: Colors.blue),
     Container(color: Colors.yellow),
   ];
 
@@ -104,10 +104,7 @@ class _HomePageState extends State<HomePage> {
 
   GestureDetector buildAddBoxOutlinedButton() {
     return GestureDetector(
-      onTap: () {
-        homeController.setPage(1);
-        setState(() {});
-      },
+      onTap: () => push(context, "/barcode_scanner"),
       child: Container(
         height: 56,
         width: 56,

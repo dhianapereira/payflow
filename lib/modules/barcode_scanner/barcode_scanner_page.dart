@@ -123,7 +123,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                 _barcodeScannerController.scanWithCamera();
               },
               secondaryLabel: "Digitar código",
-              secondaryOnPressed: () {},
+              secondaryOnPressed: () => push(context, "/insert_boleto"),
               title: "Não foi possível identificar um código de barras.",
               subtitle:
                   "Tente escanear novamente ou digite o código do seu boleto.",

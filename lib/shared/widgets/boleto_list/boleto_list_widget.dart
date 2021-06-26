@@ -25,7 +25,7 @@ class _BoletoListWidgetState extends State<BoletoListWidget> {
       valueListenable: widget.boletoListController.boletosNotifier,
       builder: (_, boletos, __) {
         return Visibility(
-          visible: widget.boletoListController.boletos.isEmpty,
+          visible: widget.boletoListController.boletos.isNotEmpty,
           child: Column(
             children: widget.boletoListController.boletos
                 .map((boleto) => BoletoTileWidget(boletoModel: boleto))

@@ -6,7 +6,6 @@ O PayFlow contém recursos como o uso de câmera e galeria, Machine Leaning com 
 
 <img src=".github/layout.png" alt="Layout PayFlow">
 <br>
-<br>
 
 O layout foi desenvolvido por [Tiago Luchtenberg](https://www.instagram.com/tiagoluchtenberg/), e você pode acessá-lo no Figma: [Layout](https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow)
 

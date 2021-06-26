@@ -3,7 +3,7 @@ import 'package:payflow/modules/barcode_scanner/barcode_scanner_controller.dart'
 import 'package:payflow/modules/barcode_scanner/barcode_scanner_status.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
-import 'package:payflow/shared/utils/app_navigator.dart';
+import 'package:payflow/shared/utils/navigator.dart';
 import 'package:payflow/shared/widgets/bottom_sheet/bottom_sheet_widget.dart';
 import 'package:payflow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 

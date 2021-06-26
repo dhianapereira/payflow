@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:payflow/shared/models/user_model.dart';
-import 'package:payflow/shared/utils/app_navigator.dart';
+import 'package:payflow/shared/utils/navigator.dart';
 import 'package:payflow/shared/utils/prefs.dart';
 
 class AuthController {

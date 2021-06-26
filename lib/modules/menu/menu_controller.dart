@@ -5,7 +5,7 @@ import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
 import 'package:payflow/shared/auth/auth_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
-import 'package:payflow/shared/utils/app_navigator.dart';
+import 'package:payflow/shared/utils/navigator.dart';
 import 'package:payflow/shared/widgets/alert/app_alert.dart';
 import 'package:payflow/shared/widgets/menu/menu.dart';
 import 'package:payflow/shared/widgets/menu/menu_item.dart';

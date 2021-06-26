@@ -6,6 +6,7 @@ import 'package:payflow/shared/models/user_model.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
+import 'package:payflow/shared/utils/text_utils.dart';
 
 class HomePage extends StatefulWidget {
   final UserModel user;
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           style: AppTextStyles.titleRegular,
           children: [
             TextSpan(
-              text: widget.user.name,
+              text: treatUsername(widget.user.name),
               style: AppTextStyles.titleBoldBackground,
             ),
           ],

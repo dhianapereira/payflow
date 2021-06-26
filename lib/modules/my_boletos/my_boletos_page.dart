@@ -65,10 +65,20 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
     return Padding(
       padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             "Meus boletos",
             style: AppTextStyles.titleBoldHeading,
+          ),
+          ValueListenableBuilder<List<BoletoModel>>(
+            valueListenable: _boletoListController.boletosNotifier,
+            builder: (_, boletos, __) {
+              return Text(
+                "${boletos.length} ao total",
+                style: AppTextStyles.captionBackground,
+              );
+            },
           ),
         ],
       ),

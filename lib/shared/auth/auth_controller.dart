@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:payflow/shared/models/user_model.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,12 @@ class AuthController {
   Future<void> saveUser(UserModel user) async {
     final instance = await SharedPreferences.getInstance();
     await instance.setString('user', user.toJson());
+  }
+
+  Future<void> logout() async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.setString('user', "");
+    await GoogleSignIn(scopes: ['email']).signOut();
   }
 
   Future<void> currentUser(BuildContext context) async {

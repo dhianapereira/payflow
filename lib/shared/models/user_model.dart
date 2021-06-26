@@ -9,13 +9,11 @@ class UserModel {
 
   UserModel(this._name, this._photoURL);
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(map['name'], map['photoURL']);
-  }
+  factory UserModel.fromMap(Map<String, dynamic> map) =>
+      UserModel(map['name'], map['photoURL']);
 
-  factory UserModel.fromJson(String json) {
-    return UserModel.fromMap(jsonDecode(json));
-  }
+  factory UserModel.fromJson(String json) =>
+      UserModel.fromMap(jsonDecode(json));
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};

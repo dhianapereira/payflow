@@ -70,8 +70,10 @@ class InsertBoletoController {
     final form = _formKey.currentState;
 
     if (form!.validate()) {
-      return await saveBoleto();
+      await saveBoleto();
     }
+
+    return;
   }
 
   dispose() {

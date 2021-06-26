@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:payflow/modules/menu/items_page.dart';
+import 'package:payflow/shared/auth/auth_controller.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
 import 'package:payflow/shared/widgets/alert/app_alert.dart';
@@ -36,7 +37,8 @@ class MenuController {
             message: "Deseja mesmo sair do aplicativo?",
             firstButtonTitle: "Não",
             secondButtonTitle: "Sim",
-            function: () {
+            function: () async {
+              await AuthController().logout();
               push(context, "/login", replace: true);
             },
           );

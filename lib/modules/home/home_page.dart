@@ -86,8 +86,9 @@ class _HomePageState extends State<HomePage> {
         children: [
           IconButton(
             onPressed: () {
-              _homeController.setPage(0);
-              setState(() {});
+              setState(() {
+                _homeController.setPage(0);
+              });
             },
             icon: Icon(
               Icons.home,

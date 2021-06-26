@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/menu/items_page.dart';
+import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
 import 'package:payflow/shared/auth/auth_controller.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
@@ -21,10 +23,22 @@ class MenuController {
         icon: Icons.person_outline,
         title: "Perfil",
         nextPageFunction: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-            return ItemsPage(body: _profileMenu);
-          }));
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ItemsPage(body: _profileMenu);
+            },
+          ));
+        },
+      ),
+      MenuItem(
+        icon: Icons.person_outline,
+        title: "Boletos",
+        nextPageFunction: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ItemsPage(body: _boletosMenu);
+            },
+          ));
         },
       ),
       MenuItem(
@@ -57,6 +71,44 @@ class MenuController {
       MenuItem(
         title: "Visualizar Perfil",
         nextPageFunction: () => push(context, "/profile"),
+      ),
+    ];
+
+    return Menu(menuItems: itens);
+  }
+
+  Menu get _boletosMenu {
+    List<Widget> itens = [
+      TitleAndBackButton(
+        child: Text("Boletos", style: AppTextStyles.titleMenu),
+      ),
+      MenuItem(
+        title: "Scannear Barcode",
+        nextPageFunction: () => push(context, "/barcode_scanner"),
+      ),
+      MenuItem(
+        title: "Cadastrar Boleto",
+        nextPageFunction: () => push(context, "/insert_boletoI"),
+      ),
+      MenuItem(
+        title: "Meus Boletos",
+        nextPageFunction: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) {
+              return const MyBoletosPage();
+            },
+          ));
+        },
+      ),
+      MenuItem(
+        title: "Meus Extratos",
+        nextPageFunction: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) {
+              return const ExtarctPage();
+            },
+          ));
+        },
       ),
     ];
 

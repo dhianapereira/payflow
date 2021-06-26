@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/menu/items_page.dart';
 import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
+import 'package:payflow/modules/profile/profile_page.dart';
 import 'package:payflow/shared/auth/auth_controller.dart';
+import 'package:payflow/shared/models/user_model.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/navigator.dart';
@@ -13,8 +15,9 @@ import 'package:payflow/shared/widgets/menu/title_and_backbutton.dart';
 
 class MenuController {
   BuildContext context;
+  UserModel user;
 
-  MenuController({required this.context});
+  MenuController({required this.context, required this.user});
 
   Menu get loadMenu => _mainMenu;
 
@@ -71,7 +74,13 @@ class MenuController {
       ),
       MenuItem(
         title: "Visualizar Perfil",
-        nextPageFunction: () => push(context, "/profile"),
+        nextPageFunction: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ProfilePage(user: user);
+            },
+          ));
+        },
         icon: Icons.person_outline,
       ),
     ];

@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:payflow/modules/menu/menu_controller.dart';
+import 'package:payflow/shared/models/user_model.dart';
 
-class MenuPage extends StatefulWidget {
-  const MenuPage({Key? key}) : super(key: key);
-
-  @override
-  _MenuPageState createState() => _MenuPageState();
-}
-
-class _MenuPageState extends State<MenuPage> {
-  late MenuController menu;
-
-  @override
-  void initState() {
-    super.initState();
-    menu = MenuController(context: context);
-  }
+class MenuPage extends StatelessWidget {
+  final UserModel user;
+  const MenuPage({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MenuController menu = MenuController(context: context, user: user);
     return menu.loadMenu;
   }
 }

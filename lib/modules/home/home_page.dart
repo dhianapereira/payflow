@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       body: [
         MyBoletosPage(key: UniqueKey()),
         ExtractPage(key: UniqueKey()),
-        MenuPage(key: UniqueKey())
+        MenuPage(key: UniqueKey(), user: widget.user)
       ][_homeController.currentPage],
       bottomNavigationBar: buildBottomNavigatorBar(),
     );

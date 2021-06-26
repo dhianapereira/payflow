@@ -30,6 +30,7 @@ class LoginController {
       UserModel user = UserModel(
         name: response!.displayName!,
         photoURL: response.photoUrl,
+        email: response.email,
       );
       authController.setUser(context, user);
     } catch (error) {

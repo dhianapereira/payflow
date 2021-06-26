@@ -1,26 +1,55 @@
 import 'dart:convert';
 
 class UserModel {
-  final String _name;
-  final String? _photoURL;
+  final String name;
+  final String? photoURL;
 
-  String get name => _name;
-  String? get photoURL => _photoURL;
+  UserModel({
+    required this.name,
+    this.photoURL,
+  });
 
-  UserModel(this._name, this._photoURL);
-
-  factory UserModel.fromMap(Map<String, dynamic> map) =>
-      UserModel(map['name'], map['photoURL']);
-
-  factory UserModel.fromJson(String json) =>
-      UserModel.fromMap(jsonDecode(json));
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = _name;
-    data['photoURL'] = _photoURL;
-    return data;
+  UserModel copyWith({
+    String? name,
+    String? photoURL,
+  }) {
+    return UserModel(
+      name: name ?? this.name,
+      photoURL: photoURL ?? this.photoURL,
+    );
   }
 
-  String toJson() => jsonEncode(toMap());
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'photoURL': photoURL,
+    };
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      name: map['name'],
+      photoURL: map['photoURL'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'UserModel(name: $name, photoURL: $photoURL)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UserModel &&
+        other.name == name &&
+        other.photoURL == photoURL;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ photoURL.hashCode;
 }

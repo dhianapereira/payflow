@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             },
             icon: Icon(
               Icons.home,
-              color: _homeController.currentPage == 1
+              color: _homeController.currentPage == 0
                   ? AppColors.primary
                   : AppColors.body,
             ),
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           buildAddBoxOutlinedButton(),
           IconButton(
             onPressed: () {
-              _homeController.setPage(2);
+              _homeController.setPage(1);
               setState(() {});
             },
             icon: Icon(

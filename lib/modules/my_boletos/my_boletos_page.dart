@@ -8,7 +8,11 @@ import 'package:payflow/shared/widgets/boleto_list/boleto_list_widget.dart';
 import 'package:animated_card/animated_card.dart';
 
 class MyBoletosPage extends StatefulWidget {
-  const MyBoletosPage({Key? key}) : super(key: key);
+  final bool hasNotification;
+  const MyBoletosPage({
+    Key? key,
+    this.hasNotification = true,
+  }) : super(key: key);
 
   @override
   State<MyBoletosPage> createState() => _MyBoletosPageState();
@@ -23,7 +27,10 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          buildBoletoInfoWidget(),
+          Visibility(
+            visible: widget.hasNotification,
+            child: buildBoletoInfoWidget(),
+          ),
           buildTitle(),
           buildLine(),
           Padding(

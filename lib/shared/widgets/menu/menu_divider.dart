@@ -11,7 +11,7 @@ class MenuDivider extends StatelessWidget {
       height: 1,
       indent: 16,
       endIndent: 16,
-      color: AppColors.input,
+      color: AppColors.stroke,
     );
   }
 }

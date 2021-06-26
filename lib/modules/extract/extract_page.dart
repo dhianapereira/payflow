@@ -5,14 +5,14 @@ import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/widgets/boleto_list/boleto_list_controller.dart';
 import 'package:payflow/shared/widgets/boleto_list/boleto_list_widget.dart';
 
-class ExtarctPage extends StatefulWidget {
-  const ExtarctPage({Key? key}) : super(key: key);
+class ExtractPage extends StatefulWidget {
+  const ExtractPage({Key? key}) : super(key: key);
 
   @override
-  State<ExtarctPage> createState() => _ExtarctPageState();
+  State<ExtractPage> createState() => _ExtractPageState();
 }
 
-class _ExtarctPageState extends State<ExtarctPage> {
+class _ExtractPageState extends State<ExtractPage> {
   final _boletoListController = BoletoListController();
 
   @override

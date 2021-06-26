@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/home/home_controller.dart';
+import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
@@ -12,18 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeController = HomeController();
+  final _homeController = HomeController();
 
   List<Widget> pages = [
-    Container(color: Colors.red),
-    Container(color: Colors.yellow),
+    const MyBoletosPage(),
+    const ExtarctPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: pages[homeController.currentPage],
+      body: pages[_homeController.currentPage],
       bottomNavigationBar: buildBottomNavigatorBar(),
     );
   }
@@ -78,23 +80,27 @@ class _HomePageState extends State<HomePage> {
         children: [
           IconButton(
             onPressed: () {
-              homeController.setPage(0);
+              _homeController.setPage(0);
               setState(() {});
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.home,
-              color: AppColors.primary,
+              color: _homeController.currentPage == 1
+                  ? AppColors.primary
+                  : AppColors.body,
             ),
           ),
           buildAddBoxOutlinedButton(),
           IconButton(
             onPressed: () {
-              homeController.setPage(2);
+              _homeController.setPage(2);
               setState(() {});
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.description_outlined,
-              color: AppColors.body,
+              color: _homeController.currentPage == 1
+                  ? AppColors.primary
+                  : AppColors.body,
             ),
           ),
         ],

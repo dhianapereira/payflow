@@ -26,6 +26,7 @@ class _ExtarctPageState extends State<ExtarctPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: BoletoListWidget(
+              errorMessage: "Nenhum boleto foi pago",
               boletoListController: _boletoListController,
             ),
           ),
@@ -57,7 +58,7 @@ class _ExtarctPageState extends State<ExtarctPage> {
 
               return Text(
                 "$counter pago(s)",
-                style: AppTextStyles.captionBackground,
+                style: AppTextStyles.buttonGray,
               );
             },
           ),

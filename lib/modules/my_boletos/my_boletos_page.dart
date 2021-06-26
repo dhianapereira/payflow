@@ -29,6 +29,7 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: BoletoListWidget(
+              errorMessage: "Nenhum boleto pendente",
               boletoListController: _boletoListController,
             ),
           ),
@@ -76,7 +77,7 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
             builder: (_, boletos, __) {
               return Text(
                 "${boletos.length} ao total",
-                style: AppTextStyles.captionBackground,
+                style: AppTextStyles.buttonGray,
               );
             },
           ),

@@ -32,13 +32,13 @@ class InsertBoletoPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 93),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
               "Preencha os dados do boleto",
               style: AppTextStyles.titleBoldHeading,
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(height: 24),
@@ -53,7 +53,7 @@ class InsertBoletoPage extends StatelessWidget {
             onChanged: (value) {},
           ),
           InputTextWidget(
-            icon: FontAwesomeIcons.wallet,
+            icon: FontAwesomeIcons.moneyBillAlt,
             label: "Valor",
             onChanged: (value) {},
           ),

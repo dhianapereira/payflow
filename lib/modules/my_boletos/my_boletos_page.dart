@@ -5,6 +5,7 @@ import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/widgets/boleto_info/boleto_info_widget.dart';
 import 'package:payflow/shared/widgets/boleto_list/boleto_list_controller.dart';
 import 'package:payflow/shared/widgets/boleto_list/boleto_list_widget.dart';
+import 'package:animated_card/animated_card.dart';
 
 class MyBoletosPage extends StatefulWidget {
   const MyBoletosPage({Key? key}) : super(key: key);
@@ -49,7 +50,10 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
           child: ValueListenableBuilder<List<BoletoModel>>(
             valueListenable: _boletoListController.boletosNotifier,
             builder: (_, boletos, __) {
-              return BoletoInfoWidget(size: boletos.length);
+              return AnimatedCard(
+                direction: AnimatedCardDirection.top,
+                child: BoletoInfoWidget(size: boletos.length),
+              );
             },
           ),
         ),

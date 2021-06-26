@@ -1,12 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:payflow/modules/insert_boleto/insert_boleto_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/widgets/input_text/input_text_widget.dart';
 import 'package:payflow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 
-class InsertBoletoPage extends StatelessWidget {
-  const InsertBoletoPage({Key? key}) : super(key: key);
+class InsertBoletoPage extends StatefulWidget {
+  final String? barcode;
+
+  const InsertBoletoPage({
+    Key? key,
+    this.barcode,
+  }) : super(key: key);
+
+  @override
+  State<InsertBoletoPage> createState() => _InsertBoletoPageState();
+}
+
+class _InsertBoletoPageState extends State<InsertBoletoPage> {
+  final _moneyInputTextController = MoneyMaskedTextController(
+    leftSymbol: "R\$",
+    decimalSeparator: ",",
+  );
+  final _dueDateInputTextController = MaskedTextController(mask: "00/00/0000");
+  final _barcodeInputTextController = TextEditingController();
+
+  final _insertBoletoController = InsertBoletoController();
+
+  @override
+  void initState() {
+    if (widget.barcode != null) {
+      _barcodeInputTextController.text = widget.barcode!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,48 +48,80 @@ class InsertBoletoPage extends StatelessWidget {
       body: buildBody(),
       bottomNavigationBar: SetLabelButtons(
         primaryLabel: "Cancelar",
-        primaryOnPressed: () {},
+        primaryOnPressed: () => Navigator.pop(context),
         secondaryLabel: "Cadastrar",
-        secondaryOnPressed: () {},
+        secondaryOnPressed: () => _insertBoletoController.registerBoleto,
         enableSecondaryColor: true,
       ),
     );
   }
 
-  Padding buildBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: Text(
-              "Preencha os dados do boleto",
-              style: AppTextStyles.titleBoldHeading,
-              textAlign: TextAlign.center,
+  SingleChildScrollView buildBody() {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Text(
+                "Preencha os dados do boleto",
+                style: AppTextStyles.titleBoldHeading,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
+            const SizedBox(height: 24),
+            buildForm(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Form buildForm() {
+    return Form(
+      key: _insertBoletoController.formKey,
+      child: Column(
+        children: [
           InputTextWidget(
             icon: Icons.description_outlined,
             label: "Nome do boleto",
-            onChanged: (value) {},
+            onChanged: (value) {
+              _insertBoletoController.onChange(name: value);
+            },
+            validator: _insertBoletoController.validateName,
           ),
           InputTextWidget(
             icon: FontAwesomeIcons.timesCircle,
             label: "Vencimento",
-            onChanged: (value) {},
+            onChanged: (value) {
+              _insertBoletoController.onChange(dueDate: value);
+            },
+            controller: _dueDateInputTextController,
+            validator: _insertBoletoController.validateDueDate,
           ),
           InputTextWidget(
             icon: FontAwesomeIcons.moneyBillAlt,
             label: "Valor",
-            onChanged: (value) {},
+            onChanged: (value) {
+              _insertBoletoController.onChange(
+                value: _moneyInputTextController.numberValue,
+              );
+            },
+            controller: _moneyInputTextController,
+            validator: (_) => _insertBoletoController
+                .validateValue(_moneyInputTextController.numberValue),
           ),
           InputTextWidget(
             icon: FontAwesomeIcons.barcode,
             label: "Código",
-            onChanged: (value) {},
+            onChanged: (value) {
+              _insertBoletoController.onChange(barcode: value);
+            },
+            controller: _barcodeInputTextController,
+            validator: _insertBoletoController.validateCode,
           ),
         ],
       ),

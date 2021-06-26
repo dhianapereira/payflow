@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:payflow/shared/models/boleto_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +7,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class InsertBoletoController {
   final _formKey = GlobalKey<FormState>();
   BoletoModel _boletoModel = BoletoModel();
+
+  bool _isProcessing = false;
+
+  final _streamController = StreamController<bool>();
+
+  Sink<bool> get input => _streamController.sink;
+  Stream<bool> get output => _streamController.stream;
+
+  bool get isProcessing => _isProcessing;
 
   GlobalKey<FormState> get formKey => _formKey;
 
@@ -43,17 +54,27 @@ class InsertBoletoController {
   }
 
   Future<void> saveBoleto() async {
+    _isProcessing = true;
+    input.add(_isProcessing);
+
     final instace = await SharedPreferences.getInstance();
     final boletos = instace.getStringList('boletos') ?? <String>[];
     boletos.add(_boletoModel.toJson());
     await instace.setStringList('boletos', boletos);
+
+    _isProcessing = false;
+    input.add(_isProcessing);
   }
 
   Future<void> registerBoleto() async {
     final form = _formKey.currentState;
 
     if (form!.validate()) {
-      return saveBoleto();
+      return await saveBoleto();
     }
+  }
+
+  dispose() {
+    _streamController.close();
   }
 }

@@ -5,11 +5,13 @@ class LabelButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
   final TextStyle? style;
+  final bool showProgress;
 
   const LabelButton({
     Key? key,
     required this.label,
     required this.onPressed,
+    this.showProgress = false,
     this.style,
   }) : super(key: key);
 
@@ -19,10 +21,12 @@ class LabelButton extends StatelessWidget {
       height: 56,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(
-          label,
-          style: style ?? AppTextStyles.buttonHeading,
-        ),
+        child: showProgress
+            ? const Center(child: CircularProgressIndicator())
+            : Text(
+                label,
+                style: style ?? AppTextStyles.buttonHeading,
+              ),
       ),
     );
   }

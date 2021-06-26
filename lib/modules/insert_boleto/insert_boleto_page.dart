@@ -46,16 +46,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
         leading: const BackButton(color: AppColors.input),
       ),
       body: buildBody(),
-      bottomNavigationBar: SetLabelButtons(
-        primaryLabel: "Cancelar",
-        primaryOnPressed: () => Navigator.pop(context),
-        enableSecondaryColor: true,
-        secondaryLabel: "Cadastrar",
-        secondaryOnPressed: () async {
-          await _insertBoletoController.registerBoleto();
-          Navigator.pop(context);
-        },
-      ),
+      bottomNavigationBar: buildButtons(),
     );
   }
 
@@ -128,6 +119,25 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
           ),
         ],
       ),
+    );
+  }
+
+  StreamBuilder<bool> buildButtons() {
+    return StreamBuilder<bool>(
+      stream: _insertBoletoController.output,
+      builder: (context, snapshot) {
+        return SetLabelButtons(
+          primaryLabel: "Cancelar",
+          primaryOnPressed: () => Navigator.pop(context),
+          enableSecondaryColor: true,
+          showProgress: _insertBoletoController.isProcessing,
+          secondaryLabel: "Cadastrar",
+          secondaryOnPressed: () async {
+            await _insertBoletoController.registerBoleto();
+            Navigator.pop(context);
+          },
+        );
+      },
     );
   }
 }

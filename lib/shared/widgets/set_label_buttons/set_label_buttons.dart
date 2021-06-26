@@ -11,6 +11,7 @@ class SetLabelButtons extends StatelessWidget {
   final VoidCallback secondaryOnPressed;
   final bool enablePrimaryColor;
   final bool enableSecondaryColor;
+  final bool showProgress;
 
   const SetLabelButtons({
     Key? key,
@@ -20,6 +21,7 @@ class SetLabelButtons extends StatelessWidget {
     required this.secondaryOnPressed,
     this.enablePrimaryColor = false,
     this.enableSecondaryColor = false,
+    this.showProgress = false,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class SetLabelButtons extends StatelessWidget {
                     onPressed: primaryOnPressed,
                     style:
                         enablePrimaryColor ? AppTextStyles.buttonPrimary : null,
+                    showProgress: enablePrimaryColor ? showProgress : false,
                   ),
                 ),
                 const DividerVerticalWidget(),
@@ -55,6 +58,7 @@ class SetLabelButtons extends StatelessWidget {
                     style: enableSecondaryColor
                         ? AppTextStyles.buttonPrimary
                         : null,
+                    showProgress: enableSecondaryColor ? showProgress : false,
                   ),
                 ),
               ],

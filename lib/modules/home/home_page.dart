@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/home/home_controller.dart';
+import 'package:payflow/modules/menu/menu_page.dart';
 import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
 import 'package:payflow/shared/models/user_model.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       body: [
         MyBoletosPage(key: UniqueKey()),
         ExtarctPage(key: UniqueKey()),
+        MenuPage(key: UniqueKey())
       ][_homeController.currentPage],
       bottomNavigationBar: buildBottomNavigatorBar(),
     );
@@ -94,7 +96,6 @@ class _HomePageState extends State<HomePage> {
                   : AppColors.body,
             ),
           ),
-          buildAddBoxOutlinedButton(),
           IconButton(
             onPressed: () {
               _homeController.setPage(1);
@@ -103,6 +104,19 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(
               Icons.description_outlined,
               color: _homeController.currentPage == 1
+                  ? AppColors.primary
+                  : AppColors.body,
+            ),
+          ),
+          buildAddBoxOutlinedButton(),
+          IconButton(
+            onPressed: () {
+              _homeController.setPage(2);
+              setState(() {});
+            },
+            icon: Icon(
+              Icons.person_outline,
+              color: _homeController.currentPage == 2
                   ? AppColors.primary
                   : AppColors.body,
             ),

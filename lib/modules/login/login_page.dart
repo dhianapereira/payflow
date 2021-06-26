@@ -16,6 +16,12 @@ class _LoginPageState extends State<LoginPage> {
   final _loginController = LoginController();
 
   @override
+  void dispose() {
+    _loginController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(

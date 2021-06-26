@@ -18,18 +18,21 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildBoletoInfoWidget(),
-        buildTitle(),
-        buildLine(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: BoletoListWidget(
-            boletoListController: _boletoListController,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          buildBoletoInfoWidget(),
+          buildTitle(),
+          buildLine(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: BoletoListWidget(
+              boletoListController: _boletoListController,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

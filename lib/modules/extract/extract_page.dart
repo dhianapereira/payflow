@@ -16,17 +16,20 @@ class _ExtarctPageState extends State<ExtarctPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildTitle(),
-        buildLine(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: BoletoListWidget(
-            boletoListController: _boletoListController,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          buildTitle(),
+          buildLine(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: BoletoListWidget(
+              boletoListController: _boletoListController,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

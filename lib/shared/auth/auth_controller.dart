@@ -12,7 +12,7 @@ class AuthController {
     if (user != null) {
       saveUser(user);
       _user = user;
-      push(context, "/home", replace: true);
+      push(context, "/home", replace: true, arguments: user);
     } else {
       push(context, "/login", replace: true);
     }

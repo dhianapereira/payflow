@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/home/home_controller.dart';
 import 'package:payflow/modules/my_boletos/my_boletos_page.dart';
+import 'package:payflow/shared/models/user_model.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/utils/app_navigator.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final UserModel user;
+  const HomePage({Key? key, required this.user}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -16,16 +18,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _homeController = HomeController();
 
-  List<Widget> pages = [
-    const MyBoletosPage(),
-    const ExtarctPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: pages[_homeController.currentPage],
+      body: [
+        MyBoletosPage(key: UniqueKey()),
+        ExtarctPage(key: UniqueKey()),
+      ][_homeController.currentPage],
       bottomNavigationBar: buildBottomNavigatorBar(),
     );
   }
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           style: AppTextStyles.titleRegular,
           children: [
             TextSpan(
-              text: "Dhiana",
+              text: widget.user.name,
               style: AppTextStyles.titleBoldBackground,
             ),
           ],
@@ -67,6 +67,9 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            image: NetworkImage(widget.user.photoURL!),
+          ),
         ),
       ),
     );
@@ -110,7 +113,10 @@ class _HomePageState extends State<HomePage> {
 
   GestureDetector buildAddBoxOutlinedButton() {
     return GestureDetector(
-      onTap: () => push(context, "/barcode_scanner"),
+      onTap: () async {
+        await push(context, "/barcode_scanner");
+        setState(() {});
+      },
       child: Container(
         height: 56,
         width: 56,

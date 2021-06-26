@@ -38,6 +38,12 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
   }
 
   @override
+  void dispose() {
+    _insertBoletoController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

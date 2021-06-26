@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-push(BuildContext context, String routeName, {bool replace = false}) {
+push(
+  BuildContext context,
+  String routeName, {
+  bool replace = false,
+  Object? arguments,
+}) {
   if (replace) {
     Navigator.of(context).popUntil((route) => route.isFirst);
 
-    Navigator.pushReplacementNamed(context, routeName);
+    Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   } else {
-    Navigator.pushNamed(context, routeName);
+    Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 }
 

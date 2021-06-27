@@ -23,25 +23,18 @@ class _MyBoletosPageState extends State<MyBoletosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          Visibility(
-            visible: widget.hasNotification,
-            child: buildBoletoInfoWidget(),
-          ),
-          buildTitle(),
-          buildLine(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: BoletoListWidget(
-              errorMessage: "Nenhum boleto pendente",
-              boletoListController: _boletoListController,
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Visibility(
+          visible: widget.hasNotification,
+          child: buildBoletoInfoWidget(),
+        ),
+        buildTitle(),
+        buildLine(),
+        BoletoListWidget(
+          boletoListController: _boletoListController,
+        ),
+      ],
     );
   }
 

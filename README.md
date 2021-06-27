@@ -12,6 +12,15 @@ O layout foi desenvolvido por [Tiago Luchtenberg](https://www.instagram.com/tiag
 ## Features implementadas
 
 - Realizar login com Google;
+- Logout;
+- Listar boletos pendentes;
+- Listar extratos;
+- Leitura de código de barra;
+- Cadastrar novo boleto;
+- Deletar boleto;
+- Pagar boleto;
+- Visualizar perfil do usuário;
+- Menu de navegação.
 
 ## Como executar?
 

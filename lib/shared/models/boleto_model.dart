@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:uuid/uuid.dart';
 
 class BoletoModel {
+  final String _id;
   final String? name;
   final String? dueDate;
   final double? value;
   final String? barcode;
-  final bool isPaid;
+  bool isPaid;
 
   BoletoModel({
     this.name,
@@ -13,7 +15,14 @@ class BoletoModel {
     this.value,
     this.barcode,
     this.isPaid = false,
-  });
+    String? id,
+  }) : _id = id ?? const Uuid().v4();
+
+  String get id => _id;
+
+  setIsPaid(bool value) {
+    isPaid = value;
+  }
 
   BoletoModel copyWith({
     String? name,
@@ -33,6 +42,7 @@ class BoletoModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'dueDate': dueDate,
       'value': value,
@@ -43,6 +53,7 @@ class BoletoModel {
 
   factory BoletoModel.fromMap(Map<String, dynamic> map) {
     return BoletoModel(
+      id: map['id'],
       name: map['name'],
       dueDate: map['dueDate'],
       value: map['value'],
@@ -55,30 +66,4 @@ class BoletoModel {
 
   factory BoletoModel.fromJson(String source) =>
       BoletoModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'BoletoModel(name: $name, dueDate: $dueDate, value: $value, barcode: $barcode, isPaid: $isPaid)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is BoletoModel &&
-        other.name == name &&
-        other.dueDate == dueDate &&
-        other.value == value &&
-        other.barcode == barcode &&
-        other.isPaid == isPaid;
-  }
-
-  @override
-  int get hashCode {
-    return name.hashCode ^
-        dueDate.hashCode ^
-        value.hashCode ^
-        barcode.hashCode ^
-        isPaid.hashCode;
-  }
 }
